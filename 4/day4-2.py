@@ -1,3 +1,6 @@
+import itertools
+
+
 def process(uri: str):
     file = open(uri, 'r')
     valid = []
@@ -8,10 +11,9 @@ def process(uri: str):
             valid.append(ln)
     for entry in valid:
         isvalid = True
-        for i in entry:
-            for j in entry:
-                if (i != j) & (sorted(i) == sorted(j)):
-                    isvalid = False
+        for x, y in itertools.combinations(entry, 2):
+            if sorted(x) == sorted(y):
+                isvalid = False
         if isvalid:
             sum += 1
     return sum
